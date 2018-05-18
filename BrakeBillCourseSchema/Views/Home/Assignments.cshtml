@@ -1,0 +1,54 @@
+﻿@model IEnumerable<BrakeBillCourseSchema.Models.Assignment>
+
+@{
+    ViewBag.Title = "Assignments";
+}
+
+<h2>Assignments</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="table">
+    <div>
+        <div>
+            @Html.DisplayNameFor(model => model.Name)
+        </div>
+        <div>
+            @Html.DisplayNameFor(model => model.ToCourse)
+        </div>
+        <div>
+            @Html.DisplayNameFor(model => model.isCompletedByStudent)
+        </div>
+        <div>
+            @Html.DisplayNameFor(model => model.ToStudent)
+        </div>
+        <div>
+           @* @Html.DisplayNameFor(model => model.Description)*@ Show Description
+        </div>
+        <div></div>
+    </div>
+
+@foreach (var item in Model) {
+    <div>
+        <div>
+            @Html.DisplayFor(modelItem => item.Name)
+        </div>
+        <div>
+            @Html.DisplayFor(modelItem => item.ToCourse)
+        </div>
+        <div>
+            @Html.DisplayFor(modelItem => item.isCompletedByStudent)
+        </div>
+        <div>
+            @Html.DisplayFor(modelItem => item.ToStudent)
+        </div>
+        <div>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Show description", "AssignmentDescription", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        </div>
+    </div>
+}
+
+</div>

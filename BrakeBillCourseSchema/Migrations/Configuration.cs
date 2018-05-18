@@ -1,5 +1,6 @@
 namespace BrakeBillCourseSchema.Migrations
 {
+    using BrakeBillCourseSchema.Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -18,6 +19,8 @@ namespace BrakeBillCourseSchema.Migrations
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
+
+            DbSet<Student>.AddOrUpdate(Id = 0, Firstname = "Sara", Lastname = "Johansson");
         }
     }
 }

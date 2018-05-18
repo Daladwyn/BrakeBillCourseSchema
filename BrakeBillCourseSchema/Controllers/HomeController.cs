@@ -13,16 +13,28 @@ namespace BrakeBillCourseSchema.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Students()
         {
             ViewBag.Message = "Your application description page.";
 
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Teachers()
         {
             ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+
+        public ActionResult Courses()
+        {
+
+            return View();
+        }
+
+        public ActionResult Assignments()
+        {
 
             return View();
         }
