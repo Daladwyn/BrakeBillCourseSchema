@@ -20,7 +20,7 @@ namespace BrakeBillCourseSchema.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
 
-            DbSet<Student>.AddOrUpdate(Id = 0, Firstname = "Sara", Lastname = "Johansson");
+            //DbSet<Student>.AddOrUpdate(Id = 0, Firstname = "Sara", Lastname = "Johansson");
         }
     }
 }

@@ -6,34 +6,34 @@
 
 <h2>Teachers</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
+<div id="TeacherCreate">
+    @Html.ActionLink("New Teacher", "TeacherCreate","Teacher")
+</div>
+<div class="table">
+    <div>
+        <div>
             @Html.DisplayNameFor(model => model.Firstname)
-        </th>
-        <th>
+        </div>
+        <div>
             @Html.DisplayNameFor(model => model.Lastname)
-        </th>
-        <th></th>
-    </tr>
+        </div>
+        <div></div>
+    </div>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
+    <div id="@"TeacherId" + item.Id">
+        <div>
             @Html.DisplayFor(modelItem => item.Firstname)
-        </td>
-        <td>
+        </div>
+        <div>
             @Html.DisplayFor(modelItem => item.Lastname)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.I }) |
-            @Html.ActionLink("Details", "Details", new { id=item.I }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.I })
-        </td>
-    </tr>
+        </div>
+        <div>
+            @Html.ActionLink("Edit", "TeacherEdit", "Teacher", new { id=item.I }) |
+            @Html.ActionLink("Show Courses", "TeacherShowCourses", "Teacher", new { id=item.I }) |
+            @Html.ActionLink("Delete", "TeacherDelete", "Teacher", new { id=item.I })
+        </div>
+    </div>
 }
 
-</table>
+</div>

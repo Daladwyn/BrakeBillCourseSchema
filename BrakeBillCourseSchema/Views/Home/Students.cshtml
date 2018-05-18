@@ -1,8 +1,55 @@
-﻿@model BrakeBillCourseSchema.Models.Student
+﻿@model IEnumerable<BrakeBillCourseSchema.Models.Student>
 
 @{
     ViewBag.Title = "Students";
 }
 
 <h2>Students</h2>
+
+<div id="StudentCreate">
+    @Html.ActionLink("New Student", "StudentCreate" , "Student")
+</div>
+<div class="table">
+    <div>
+        <div>
+            @Html.DisplayNameFor(model => model.Firstname)
+        </div>
+        <div>
+            @Html.DisplayNameFor(model => model.Lastname)
+        </div>
+        @*<div>
+        <div>
+            @Html.DisplayNameFor(model => model.)
+        </div>
+            @Html.DisplayNameFor(model => model.ToStudent)
+        </div>*@
+        <div>
+            @* @Html.DisplayNameFor(model => model.Description) Show Description*@
+        </div>
+        <div></div>
+    </div>
+
+  @foreach (var item in Model)    {
+        <div id="@"StudentId" + item.Id">
+            <div>
+                @Html.DisplayFor(modelItem => item.Firstname)
+            </div>
+            <div>
+                @Html.DisplayFor(modelItem => item.Lastname)
+            </div>
+            <div>
+                @*Show Partialview with all the courses the student is signed up for. Html.DisplayFor(modelItem => item.)
+         </div>
+        @* <div>
+             @Html.DisplayFor(modelItem => item.ToStudent)
+         </div>*@
+                <div>
+                    @Html.ActionLink("Edit", "StudentEdit", "Student", new { id = item.Id }) |
+                    @Html.ActionLink("List Courses", "StudentListCourses", "Student", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "StudentDelete", "Student", new { id = item.Id })
+                </div>
+            </div>
+    }
+}
+</div>
 

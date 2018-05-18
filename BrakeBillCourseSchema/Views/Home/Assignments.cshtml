@@ -6,9 +6,9 @@
 
 <h2>Assignments</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<div id="AssignmentCreate">
+    @Html.ActionLink("Create New Assignment", "AssignmentCreate", "Assignment")
+</div>
 <div class="table">
     <div>
         <div>
@@ -30,7 +30,7 @@
     </div>
 
 @foreach (var item in Model) {
-    <div>
+    <div id="@"AssignmentId" + item.Id">
         <div>
             @Html.DisplayFor(modelItem => item.Name)
         </div>
@@ -44,9 +44,10 @@
             @Html.DisplayFor(modelItem => item.ToStudent)
         </div>
         <div>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Show description", "AssignmentDescription", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            @Html.ActionLink("Edit", "AssignmentEdit","Assignment", new { id = item.Id }) |
+            @Html.ActionLink("Show description", "AssignmentDescription", "Assignment", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "AssignmentDelete", "Assignment", new { id = item.Id })
+            
         </div>
     </div>
 }

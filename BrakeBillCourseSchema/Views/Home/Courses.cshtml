@@ -6,34 +6,34 @@
 
 <h2>Courses</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
+<div id="CourseCreate">
+    @Html.ActionLink("Create New Course", "CourseCreate" , "Course")
+</div>
+<div class="table">
+    <div>
+        <div>
             @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
+        </div>
+        <div>
             @Html.DisplayNameFor(model => model.hasTeacher)
-        </th>
-        <th></th>
-    </tr>
+        </div>
+        <div></div>
+    </div>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
+    <div id="@"CourseId" + item.Id">
+        <div>
             @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
+        </div>
+        <div>
             @Html.DisplayFor(modelItem => item.hasTeacher)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+        </div>
+        <div>
+            @Html.ActionLink("Edit", "CourseEdit", "Course", new { id=item.Id }) |
+            @Html.ActionLink("Details", "CourseDetails", "Course", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "CourseDelete", "Course", new { id=item.Id })
+        </div>
+    </div>
 }
 
-</table>
+</div>
