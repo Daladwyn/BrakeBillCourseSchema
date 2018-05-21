@@ -6,9 +6,9 @@ using System.Data.Entity;
 
 namespace BrakeBillCourseSchema.Models
 {
-    public class BrakeBillDbContext: DbContext
+    public class context: DbContext
     {
-        public BrakeBillDbContext() : base("BrakeBillDbConnection")
+        public context() : base("BrakeBillDbConnection")
         {
 
         }
