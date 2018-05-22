@@ -19,7 +19,7 @@ namespace BrakeBillCourseSchema.Models
         public int hasTeacher { get; set; }
 
         public List<Assignment> CourseAssignments = new List<Assignment>();
-        public List<Student> Students = new List<Student>();
+        public List<Student> CourseStudents = new List<Student>();
 
     }
 }

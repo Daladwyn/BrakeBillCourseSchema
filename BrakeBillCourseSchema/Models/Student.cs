@@ -18,9 +18,9 @@ namespace BrakeBillCourseSchema.Models
         [MaxLength(20)]
         [Required]
         public string Lastname { get; set; }
-
-        
-        public List<Course> Courses = new List<Course>();
+        [Index]
+        [Required]
+        public int Course_Id { get; set; }
         public List<Assignment> Assignments = new List<Assignment>();
     }
 }

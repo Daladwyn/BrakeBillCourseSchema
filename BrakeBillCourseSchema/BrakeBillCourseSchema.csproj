@@ -216,6 +216,8 @@
     <Content Include="Views\Home\Courses.cshtml" />
     <Content Include="Views\Home\Assignments.cshtml" />
     <Content Include="Views\Student\_StudentCreateForm.cshtml" />
+    <Content Include="Views\Shared\_DeletedObject.cshtml" />
+    <Content Include="Views\Shared\_StudentCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

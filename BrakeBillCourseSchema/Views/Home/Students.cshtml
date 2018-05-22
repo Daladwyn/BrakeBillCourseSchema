@@ -5,13 +5,14 @@
 }
 
 <h2>Students</h2>
-
 <div id="StudentCreate">
+    @* @Html.Partial("_StudentCreate")*@
+
     @Ajax.ActionLink("New Student", "StudentCreateForm", "Student",
-    ajaxOptions: new AjaxOptions {
-        InsertionMode=InsertionMode.Replace,
-        UpdateTargetId= "StudentCreate",
-    })
+ajaxOptions: new AjaxOptions {
+    InsertionMode=InsertionMode.ReplaceWith,
+    UpdateTargetId= "StudentCreate",
+})
 </div>
 
     <ul class="row">
@@ -43,7 +44,12 @@
 
                 @Html.ActionLink("Edit", "StudentEdit", "Student", new { id = item.Id }) |
                 @Html.ActionLink("List Courses", "StudentListCourses", "Student", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "StudentDelete", "Student", new { id = item.Id })
+                @Ajax.ActionLink("Delete", "StudentDelete", "Student", new { id = item.Id },
+                ajaxOptions: new AjaxOptions
+               {
+                   UpdateTargetId= "StudentId" + item.Id,
+                   InsertionMode= InsertionMode.ReplaceWith
+               })
 
             </li>
             <li class="rowbreak"></li>
