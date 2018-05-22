@@ -59,25 +59,25 @@ namespace BrakeBillCourseSchema.Controllers
 
         public ActionResult StudentDelete(int id)
         {
-            List<Student> presentStudents = new List<Student>();
+            List<Student> presentStudents=new List<Student>();
             using (var context = new context())
             {
                 foreach (var item in context.Students)
                 {
-                    presentStudents.Add(context.Students.Find(item.Id));
+                    presentStudents.Add(context.Students.SingleOrDefault());
                 }
-                for (int i = 0; i <= presentStudents.Count; i++)
+                for (int i = 0; i <= presentStudents.Count(); i++)
                 {
-                    for (int y = 1; y <= id; y++)
+                    
+                    
+                    if (presentStudents[i].Id == id)
                     {
-                        if (presentStudents[i].Id == y && y==id)
-                        {
-                            presentStudents.Remove(presentStudents[i]);
-                            context.Students.Remove(presentStudents[i]);
-                            context.SaveChanges();
-                            return PartialView("_DeletedObject");
-                        }
+                        presentStudents.Remove(presentStudents[i]);
+                        context.Students.Remove(presentStudents[i]);
+                        context.SaveChanges();
+                        return PartialView("_DeletedObject");
                     }
+                    //}
                 }
             }
             presentStudents = null;
