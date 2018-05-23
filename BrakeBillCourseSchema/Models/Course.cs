@@ -11,12 +11,16 @@ namespace BrakeBillCourseSchema.Models
     public class Course
     {
         [Key]
-        public int Id { get; set; }
+        public int CourseId { get; set; }
         [MaxLength(20)]
         [Required]
         public string Name { get; set; }
         [Required]
-        public int hasTeacher { get; set; }
+        [Index]
+        public int TeacherId { get; set; }
+        [Required]
+        [MaxLength(100)]
+        public string Description { get; set; }
 
         public List<Assignment> CourseAssignments = new List<Assignment>();
         public List<Student> CourseStudents = new List<Student>();

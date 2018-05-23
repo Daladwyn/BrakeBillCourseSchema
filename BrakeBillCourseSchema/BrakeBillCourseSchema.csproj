@@ -218,12 +218,15 @@
     <Content Include="Views\Student\_StudentCreateForm.cshtml" />
     <Content Include="Views\Shared\_DeletedObject.cshtml" />
     <Content Include="Views\Shared\_StudentCreate.cshtml" />
+    <Content Include="Views\Shared\_TeacherCreate.cshtml" />
+    <Content Include="Views\Teacher\_TeacherCreateForm.cshtml" />
+    <Content Include="Views\Teacher\_TeacherShowCourses.cshtml" />
+    <Content Include="Views\Shared\_TeacherList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Assignment\" />
     <Folder Include="Views\Course\" />
-    <Folder Include="Views\Teacher\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

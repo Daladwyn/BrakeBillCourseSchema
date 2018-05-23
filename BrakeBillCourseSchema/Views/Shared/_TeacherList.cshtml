@@ -1,0 +1,26 @@
+﻿@model BrakeBillCourseSchema.Models.Teacher
+
+<ul class="row" id="@(" TeacherId" + Model.TeacherId)">
+    <li class="col-md-3">
+        @Html.DisplayFor(modelItem => Model.Firstname)
+    </li>
+    <li class="col-md-3">
+        @Html.DisplayFor(modelItem => Model.Lastname)
+    </li>
+    <li class="col-md-6">
+        @Html.ActionLink("Edit", "TeacherEdit", "Student", new { id = Model.TeacherId }) |
+        @Ajax.ActionLink("Show Courses", "TeacherShowCourses", "Teacher", new { id = Model.TeacherId },
+       ajaxOptions: new AjaxOptions
+       {
+           UpdateTargetId = "TeacherId" + Model.TeacherId,
+           InsertionMode = InsertionMode.ReplaceWith
+       }) |
+        @Ajax.ActionLink("Delete", "TeacherDelete", "Teacher", new { id = Model.TeacherId },
+ajaxOptions: new AjaxOptions
+{
+UpdateTargetId= "TeacherId" + Model.TeacherId,
+InsertionMode= InsertionMode.ReplaceWith
+})
+    </li>
+    <li class="rowbreak"></li>
+</ul>

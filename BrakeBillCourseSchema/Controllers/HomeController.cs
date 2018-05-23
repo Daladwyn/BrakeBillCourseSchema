@@ -23,7 +23,7 @@ namespace BrakeBillCourseSchema.Controllers
             {
                 foreach (var item in context.Students)
                 {
-                    presentStudents.Add(context.Students.Find(item.Id));
+                    presentStudents.Add(context.Students.Find(item.StudentId));
                 }
 
 
@@ -31,16 +31,34 @@ namespace BrakeBillCourseSchema.Controllers
             }
         }
 
-        public ActionResult Teachers()
+        public ActionResult Teachers(int Teacherid)
         {
             ViewBag.Message = "Brakebills teachers.";
-
-            return View();
+            List<Teacher> presentTeachers = new List<Teacher>();
+            using (var context = new context())
+            {
+                Teacher teacherToAdd = new Teacher();
+                foreach (var item in context.Teachers)
+                {
+                    teacherToAdd = context.Teachers.Include("Courses").SingleOrDefault(t => t.TeacherId == item.TeacherId);
+                    //Hotels.Include("Rooms").SingleOrDefault(h => h.Id == id);
+                    presentTeachers.Add(teacherToAdd);
+                }
+            }
+            return View("Teachers", presentTeachers);
         }
 
         public ActionResult Courses()
         {
             ViewBag.Message = "Brakebills Course Programme.";
+            List<Course> presentCourses = new List<Course>();
+            using (var context = new context())
+            {
+                foreach (var item in context.Courses)
+                {
+                    presentCourses.Add(context.Courses.Find(item.CourseId));
+                }
+            }
             return View();
         }
 

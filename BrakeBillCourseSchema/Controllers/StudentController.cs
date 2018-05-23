@@ -12,9 +12,15 @@ namespace BrakeBillCourseSchema.Controllers
     public class StudentController : Controller
     {
         // GET: Student
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
+        }
+        [HttpPost]
+        public ActionResult Index2()
+        {
+            return View("~/Views/Home/Students");
         }
 
         //[HttpPost]
@@ -25,26 +31,28 @@ namespace BrakeBillCourseSchema.Controllers
             {
                 foreach (var item in context.Courses)
                 {
-                    presentCourses.Add(context.Courses.Find(item.Id));
+                    presentCourses.Add(context.Courses.Find(item.CourseId));
                 }
             }
             return PartialView("_StudentCreateForm", presentCourses);
         }
 
-        public ActionResult StudentCreate(string Firstname, string Lastname, int id)
+        [HttpPost]
+        public ActionResult StudentCreate([Bind(Include = "Firstname,Lastname,id")] Student newStudent)
         {
-            using (var context = new context())
+            if (ModelState.IsValid)
             {
-                var newStudent = new Student()
+                using (var context = new context())
                 {
-                    Firstname = Firstname,
-                    Lastname = Lastname,
-                    Course_Id = id
-                };
-                context.Students.Add(newStudent);
-                context.SaveChanges();
+                    context.Students.Add(newStudent);
+                    context.SaveChanges();
+                }
+                return PartialView("_StudentCreate");
             }
-            return PartialView("_StudentCreate");
+            else
+            {
+                return PartialView("_StudentCreate");
+            }
         }
 
         public ActionResult StudentEdit(int id)
@@ -59,25 +67,25 @@ namespace BrakeBillCourseSchema.Controllers
 
         public ActionResult StudentDelete(int id)
         {
-            List<Student> presentStudents=new List<Student>();
+            List<Student> presentStudents = new List<Student>();
             using (var context = new context())
             {
                 foreach (var item in context.Students)
                 {
-                    presentStudents.Add(context.Students.SingleOrDefault());
+                    presentStudents.Add(context.Students.Find(item.StudentId));
                 }
                 for (int i = 0; i <= presentStudents.Count(); i++)
                 {
-                    
-                    
-                    if (presentStudents[i].Id == id)
+
+
+                    if (presentStudents[i].StudentId == id)
                     {
-                        presentStudents.Remove(presentStudents[i]);
+                        // presentStudents.Remove(presentStudents[i]);
                         context.Students.Remove(presentStudents[i]);
                         context.SaveChanges();
+                        presentStudents = null;
                         return PartialView("_DeletedObject");
                     }
-                    //}
                 }
             }
             presentStudents = null;

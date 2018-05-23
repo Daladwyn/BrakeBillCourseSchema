@@ -1,39 +1,22 @@
 ﻿@model IEnumerable<BrakeBillCourseSchema.Models.Teacher>
-
 @{
     ViewBag.Title = "Teachers";
 }
-
 <h2>Teachers</h2>
-
 <div id="TeacherCreate">
-    @Html.ActionLink("New Teacher", "TeacherCreate","Teacher")
+    @Html.Partial("_TeacherCreate")
 </div>
-<div class="table">
-    <div>
-        <div>
-            @Html.DisplayNameFor(model => model.Firstname)
-        </div>
-        <div>
-            @Html.DisplayNameFor(model => model.Lastname)
-        </div>
-        <div></div>
-    </div>
-
-@foreach (var item in Model) {
-    <div id="@"TeacherId" + item.Id">
-        <div>
-            @Html.DisplayFor(modelItem => item.Firstname)
-        </div>
-        <div>
-            @Html.DisplayFor(modelItem => item.Lastname)
-        </div>
-        <div>
-            @Html.ActionLink("Edit", "TeacherEdit", "Teacher", new { id=item.I }) |
-            @Html.ActionLink("Show Courses", "TeacherShowCourses", "Teacher", new { id=item.I }) |
-            @Html.ActionLink("Delete", "TeacherDelete", "Teacher", new { id=item.I })
-        </div>
-    </div>
+<ul class="row">
+    <li class="col-md-3">
+        @Html.DisplayNameFor(model => model.Firstname)
+    </li>
+    <li class="col-md-3">
+        @Html.DisplayNameFor(model => model.Lastname)
+    </li>
+    <li class="col-md-6"></li>
+    <li class="rowbreak"></li>
+</ul>
+@foreach (var item in Model)
+{
+    @Html.Partial("_Teacherlist","Teacher")
 }
-
-</div>

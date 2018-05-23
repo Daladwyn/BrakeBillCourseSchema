@@ -11,7 +11,7 @@ namespace BrakeBillCourseSchema.Models
     public class Teacher
     {
         [Key]
-        public int I { get; set; }
+        public int TeacherId { get; set; }
         [MaxLength(20)]
         [Required]
         public string Firstname { get; set; }

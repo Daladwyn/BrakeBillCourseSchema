@@ -11,7 +11,7 @@ namespace BrakeBillCourseSchema.Models
     public class Student
     {
         [Key]
-        public int Id { get; set; }
+        public int StudentId { get; set; }
         [MaxLength(20)]
         [Required]
         public string Firstname { get; set; }
@@ -20,7 +20,7 @@ namespace BrakeBillCourseSchema.Models
         public string Lastname { get; set; }
         [Index]
         [Required]
-        public int Course_Id { get; set; }
+        public int CourseId { get; set; }
         public List<Assignment> Assignments = new List<Assignment>();
     }
 }

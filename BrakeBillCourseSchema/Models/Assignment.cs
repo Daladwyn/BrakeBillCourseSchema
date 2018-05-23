@@ -11,20 +11,18 @@ namespace BrakeBillCourseSchema.Models
     public class Assignment
     {
         [Key]
-        public int Id { get; set; }
+        public int AssignmentId { get; set; }
         [Required]
         [MaxLength(20)]
         public string Name { get; set; }
         [Required]
-        [Index]
-        public int ToCourse { get; set; }
+        public int CourseId { get; set; }
         [Required]
-        [Index]
-        public int ToStudent { get; set; }
+        public int StudentId { get; set; }
         [Required]
         [MaxLength(250)]
         public string Description { get; set; }
         [Required]
-        public bool isCompletedByStudent { get; set; }
+        public bool IsCompletedByStudent { get; set; }
     }
 }

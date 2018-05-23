@@ -20,19 +20,19 @@ namespace BrakeBillCourseSchema.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
 
-            context.Students.AddOrUpdate(s => s.Id,
-            new Student() { Id = 0, Firstname = "Sara", Lastname = "Johansson" },
-            new Student() { Id = 1, Firstname = "Mats", Lastname = "Nilsson" });
+            context.Students.AddOrUpdate(s => s.StudentId,
+            new Student() { StudentId = 0, Firstname = "Sara", Lastname = "Johansson", CourseId=1 },
+            new Student() { StudentId = 1, Firstname = "Mats", Lastname = "Nilsson", CourseId=1 });
 
             context.Teachers.AddOrUpdate(t => t.Firstname,
             new Teacher() { Firstname = "Jerker", Lastname = "Svensson" });
 
-            context.Courses.AddOrUpdate(c => c.Id,
-            new Course() { Id = 0, Name = "Transformation", hasTeacher = 0 });
+            context.Courses.AddOrUpdate(c => c.CourseId,
+            new Course() { CourseId = 1, Name = "Transformation101", TeacherId = 0, Description = "Transformation 101: how to transform a mouse into a Lamp." });
 
 
-            context.Assignments.AddOrUpdate(a => a.Id,
-            new Assignment { Id = 0, Name = "Transformation1", ToCourse = 0, ToStudent = 0, Description = "Transformation 101: how to transform a mouse into a Lamp.", isCompletedByStudent = false });
+            context.Assignments.AddOrUpdate(a => a.AssignmentId,
+            new Assignment { AssignmentId = 0, Name = "Transformation1", CourseId = 1, StudentId = 0, Description = "Assignment1 in Transformation. How to transform a mouse into a Lamp.", IsCompletedByStudent = false });
             context.SaveChanges();
         }
     }

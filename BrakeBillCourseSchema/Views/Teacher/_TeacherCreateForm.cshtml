@@ -1,34 +1,33 @@
 ﻿@model IEnumerable<BrakeBillCourseSchema.Models.Course>
 
-@using (Ajax.BeginForm("StudentCreate", "Student",
+@using (Ajax.BeginForm("TeacherCreate", "Teacher",
 ajaxOptions: new AjaxOptions
 {
-    UpdateTargetId = "StudentCreate",
+    UpdateTargetId = "TeacherCreate",
     InsertionMode = InsertionMode.ReplaceWith,
 }))
 {
     <div class="form-horizontal">
-        <h4>Register a new student:</h4>
+        <h4>Register a new Teacher:</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="row">
             <div class="form-group">
                 <div class="col-md-3">
-                    Students firstname: @Html.Editor("Firstname")
+                    Teachers firstname: @Html.Editor("Firstname")
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-md-3">
-                    Students lastname: @Html.Editor("Lastname")
+                    Teachers lastname: @Html.Editor("Lastname")
                 </div>
             </div>
             <div class="form-group">
-                @*@Html.Label("Selcted Course")*@
                 <div class="col-md-3">
-                    Which course to attend: <select name="id">
+                    Which course to lead: <select name="id">
                         @foreach (var item in Model)
                         {
-                            <option value="@item.Id">@item.Name</option>
+                            <option value="@item.CourseId">@item.Name</option>
                         }
                     </select>
                 </div>
@@ -42,17 +41,16 @@ ajaxOptions: new AjaxOptions
     </div>
 }
 
-    <div>
-        @Ajax.ActionLink("Back to List", "Index2", "Student",
-        ajaxOptions: new AjaxOptions
-        {
-            InsertionMode = InsertionMode.Replace,
-            UpdateTargetId = "StudentIndex",
-        })
-    </div>
+<div>
+    @Ajax.ActionLink("Back to List", "Index2", "Teacher",
+    ajaxOptions: new AjaxOptions
+    {
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "TeacherIndex",
+    })
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
-
 
