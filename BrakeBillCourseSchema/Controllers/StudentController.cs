@@ -38,7 +38,7 @@ namespace BrakeBillCourseSchema.Controllers
         }
 
         [HttpPost]
-        public ActionResult StudentCreate([Bind(Include = "Firstname,Lastname,id")] Student newStudent)
+        public ActionResult StudentCreate([Bind(Include = "Firstname,Lastname,Courseid")] Student newStudent)
         {
             if (ModelState.IsValid)
             {
@@ -47,7 +47,8 @@ namespace BrakeBillCourseSchema.Controllers
                     context.Students.Add(newStudent);
                     context.SaveChanges();
                 }
-                return PartialView("_StudentCreate");
+                return RedirectToAction("students", "Home");
+                //View("~/Views/Home/Students");
             }
             else
             {
@@ -76,11 +77,9 @@ namespace BrakeBillCourseSchema.Controllers
                 }
                 for (int i = 0; i <= presentStudents.Count(); i++)
                 {
-
-
                     if (presentStudents[i].StudentId == id)
                     {
-                        // presentStudents.Remove(presentStudents[i]);
+                        presentStudents.Remove(presentStudents[i]);
                         context.Students.Remove(presentStudents[i]);
                         context.SaveChanges();
                         presentStudents = null;

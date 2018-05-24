@@ -18,5 +18,7 @@
 </ul>
 @foreach (var item in Model)
 {
-    @Html.Partial("_Teacherlist","Teacher")
+    <ul class="row" id="@(" TeacherId" + item.TeacherId)">
+        @Html.Action("Teacherlist", "Teacher", new { id = item.TeacherId })
+    </ul>
 }

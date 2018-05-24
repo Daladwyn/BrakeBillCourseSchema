@@ -3,7 +3,7 @@
 @using (Ajax.BeginForm("StudentCreate", "Student",
 ajaxOptions: new AjaxOptions
 {
-    UpdateTargetId = "StudentCreate",
+    UpdateTargetId = "StudentIndex",
     InsertionMode = InsertionMode.ReplaceWith,
 }))
 {
@@ -23,12 +23,12 @@ ajaxOptions: new AjaxOptions
                 </div>
             </div>
             <div class="form-group">
-                @*@Html.Label("Selcted Course")*@
+               
                 <div class="col-md-3">
-                    Which course to attend: <select name="id">
+                    Which course to attend: <select name="Courseid">
                         @foreach (var item in Model)
                         {
-                            <option value="@item.Id">@item.Name</option>
+                            <option value="@item.CourseId">@item.Name</option>
                         }
                     </select>
                 </div>
