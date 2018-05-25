@@ -21,8 +21,8 @@ namespace BrakeBillCourseSchema.Migrations
             //  to avoid creating duplicate seed data.
 
             context.Students.AddOrUpdate(s => s.StudentId,
-            new Student() { StudentId = 0, Firstname = "Sara", Lastname = "Johansson", CourseId=1 },
-            new Student() { StudentId = 1, Firstname = "Mats", Lastname = "Nilsson", CourseId=1 });
+            new Student() { StudentId = 0, Firstname = "Sara", Lastname = "Johansson" },
+            new Student() { StudentId = 1, Firstname = "Mats", Lastname = "Nilsson" });
 
             context.Teachers.AddOrUpdate(t => t.Firstname,
             new Teacher() { Firstname = "Jerker", Lastname = "Svensson" });

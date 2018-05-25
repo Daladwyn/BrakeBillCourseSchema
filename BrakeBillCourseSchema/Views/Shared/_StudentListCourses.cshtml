@@ -1,0 +1,29 @@
+﻿@model BrakeBillCourseSchema.Models.Student
+
+<ul class="row" id="@("StudentId" + Model.StudentId)">
+    <li class="col-md-3">
+        @Html.DisplayFor(modelItem => Model.Firstname)
+    </li>
+    <li class="col-md-3">
+        @Html.DisplayFor(modelItem => Model.Lastname)
+    </li>
+    <li class="col-md-6">
+        @*Show Partialview with all the courses the student is signed up for. Html.DisplayFor(modelItem => item.)
+        *@
+
+
+        @Ajax.ActionLink("Hide Courses", "StudentCourses", "Student", new { id = Model.StudentId },
+       ajaxOptions: new AjaxOptions
+       {
+           UpdateTargetId= "StudentId" + Model.StudentId,
+           InsertionMode= InsertionMode.ReplaceWith
+       }) |
+
+    </li>
+    <li class="rowbreak"></li>
+    @foreach (var item in Model.StudentCourses)
+    {
+        <li>@item.Name</li>
+        <li class="rowbreak"></li>
+    }
+</ul>

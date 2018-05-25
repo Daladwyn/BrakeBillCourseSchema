@@ -23,26 +23,7 @@
     @foreach (var item in Model)
     {
         <ul class="row" id="@("StudentId" + item.StudentId)">
-            <li class="col-md-3">
-                @Html.DisplayFor(modelItem => item.Firstname)
-            </li>
-            <li class="col-md-3">
-                @Html.DisplayFor(modelItem => item.Lastname)
-            </li>
-            <li class="col-md-6">
-                @*Show Partialview with all the courses the student is signed up for. Html.DisplayFor(modelItem => item.)
-                *@
-
-                @Html.ActionLink("Edit", "StudentEdit", "Student", new { id = item.StudentId }) |
-                @Html.ActionLink("List Courses", "StudentListCourses", "Student", new { id = item.StudentId }) |
-                @Ajax.ActionLink("Delete", "StudentDelete", "Student", new { id = item.StudentId },
-                ajaxOptions: new AjaxOptions
-               {
-                   UpdateTargetId= "StudentId" + item.StudentId,
-                   InsertionMode= InsertionMode.ReplaceWith
-               })
-            </li>
-            <li class="rowbreak"></li>
+           @Html.Action("ShowStudent","Student", new { id = item.StudentId })
         </ul>
     }
     <div id="EndOfStudents"></div>

@@ -13,9 +13,14 @@ namespace BrakeBillCourseSchema.Controllers
     {
         // GET: Student
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult ShowStudent(int id)
         {
-            return View();
+            Student studentToShow = new Student();
+            using (var context = new context())
+            {
+                studentToShow = context.Students.SingleOrDefault(s => s.StudentId == id);
+            };
+            return PartialView("_ShowStudent",studentToShow);
         }
         [HttpPost]
         public ActionResult Index2()
@@ -45,15 +50,12 @@ namespace BrakeBillCourseSchema.Controllers
                 using (var context = new context())
                 {
                     context.Students.Add(newStudent);
+                    newStudent = null;
                     context.SaveChanges();
                 }
-                return RedirectToAction("students", "Home");
-                //View("~/Views/Home/Students");
+                return View ("students");
             }
-            else
-            {
-                return PartialView("_StudentCreate");
-            }
+            return RedirectToAction("students", "Home");
         }
 
         public ActionResult StudentEdit(int id)
@@ -63,7 +65,14 @@ namespace BrakeBillCourseSchema.Controllers
 
         public ActionResult StudentListCourses(int id)
         {
-            return PartialView();
+            Student studentToShow = new Student();
+            using (var context = new context())
+            {
+                studentToShow = context.Students.Include(c => c.StudentCourses).SingleOrDefault(s => s.StudentId == id);
+
+            };
+
+            return PartialView("_StudentListCourses",studentToShow);
         }
 
         public ActionResult StudentDelete(int id)
@@ -79,7 +88,7 @@ namespace BrakeBillCourseSchema.Controllers
                 {
                     if (presentStudents[i].StudentId == id)
                     {
-                        presentStudents.Remove(presentStudents[i]);
+
                         context.Students.Remove(presentStudents[i]);
                         context.SaveChanges();
                         presentStudents = null;
