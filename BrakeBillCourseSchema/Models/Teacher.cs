@@ -18,7 +18,7 @@ namespace BrakeBillCourseSchema.Models
         [MaxLength(20)]
         [Required]
         public string Lastname { get; set; }
-
-        public List<Course> Courses = new List<Course>();
+        
+        public List<Course> TeachingInCourses { get; set; }
     }
 }

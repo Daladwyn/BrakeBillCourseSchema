@@ -11,6 +11,45 @@ namespace BrakeBillCourseSchema.Controllers
 {
     public class StudentController : Controller
     {
+        public ActionResult StudentListAssignment(int id)
+        {
+            List<Assignment> AssignmentsToShow = new List<Assignment>();
+            Student studentToShow = new Student();
+            using (var context = new context())
+            {
+                studentToShow = context.Students.SingleOrDefault(s => s.StudentId == id);
+                foreach (var assignment in context.Assignments)
+                {
+                    if (assignment.StudentId == studentToShow.StudentId)
+                    {
+                        studentToShow.StudentAssignments.Add(assignment);
+                    }
+                }
+            };
+            return PartialView("_StudentListAssignment", studentToShow);
+        }
+        public ActionResult StudentListCourses(int id)
+        {
+            List<Course> coursesToShow = new List<Course>();
+            Student studentToShow = new Student();
+            using (var context = new context())
+            {
+                studentToShow = context.Students.SingleOrDefault(s => s.StudentId == id);
+                foreach (var courseitem in context.Courses)
+                {
+                    foreach (var student in courseitem.CourseStudents)
+                    {
+                        if (student.StudentId == studentToShow.StudentId)
+                        {
+                            studentToShow.StudentCourses.Add(courseitem);
+                        }
+                    }
+                    //coursesToShow.Add(context.Courses.Include("Students").Where(s => s.StudentId == id).ToList();
+                }
+            };
+            return PartialView("_StudentListCourses", studentToShow);
+        }
+
         // GET: Student
         [HttpGet]
         public ActionResult ShowStudent(int id)
@@ -18,9 +57,10 @@ namespace BrakeBillCourseSchema.Controllers
             Student studentToShow = new Student();
             using (var context = new context())
             {
+
                 studentToShow = context.Students.SingleOrDefault(s => s.StudentId == id);
             };
-            return PartialView("_ShowStudent",studentToShow);
+            return PartialView("_ShowStudent", studentToShow);
         }
         [HttpPost]
         public ActionResult Index2()
@@ -43,37 +83,26 @@ namespace BrakeBillCourseSchema.Controllers
         }
 
         [HttpPost]
-        public ActionResult StudentCreate([Bind(Include = "Firstname,Lastname,Courseid")] Student newStudent)
+        public ActionResult StudentCreate([Bind(Include = "Firstname,Lastname")] Student newStudent, int Courseid)
         {
             if (ModelState.IsValid)
             {
                 using (var context = new context())
                 {
+                    Course CourseToAdd = context.Courses.SingleOrDefault(c => c.CourseId == Courseid);
+
+                    // Adding assignments to the student, NOT COMPLETE!!!!!
+                    //CourseToAdd.CourseAssignments.Add(context.Assignments.Where(Assignments))
+                    newStudent.StudentCourses.Add(CourseToAdd);
                     context.Students.Add(newStudent);
                     newStudent = null;
                     context.SaveChanges();
                 }
-                return View ("students");
+                return View("students");
             }
             return RedirectToAction("students", "Home");
         }
 
-        public ActionResult StudentEdit(int id)
-        {
-            return PartialView();
-        }
-
-        public ActionResult StudentListCourses(int id)
-        {
-            Student studentToShow = new Student();
-            using (var context = new context())
-            {
-                studentToShow = context.Students.Include(c => c.StudentCourses).SingleOrDefault(s => s.StudentId == id);
-
-            };
-
-            return PartialView("_StudentListCourses",studentToShow);
-        }
 
         public ActionResult StudentDelete(int id)
         {
@@ -98,6 +127,11 @@ namespace BrakeBillCourseSchema.Controllers
             }
             presentStudents = null;
             return PartialView("_DeletedObject");
+        }
+
+        public ActionResult StudentEdit(int id)
+        {
+            return PartialView();
         }
     }
 }

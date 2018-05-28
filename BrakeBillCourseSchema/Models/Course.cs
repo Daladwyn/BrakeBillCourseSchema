@@ -16,14 +16,14 @@ namespace BrakeBillCourseSchema.Models
         [Required]
         public string Name { get; set; }
         [Required]
-        [Index]
         public int TeacherId { get; set; }
         [Required]
         [MaxLength(100)]
         public string Description { get; set; }
-
-        public List<Assignment> CourseAssignments = new List<Assignment>();
-        public List<Student> CourseStudents = new List<Student>();
+        
+        public List<Course> CourseAssignments { get; set; }
+        
+        public List<Student> CourseStudents { get; set; }
 
     }
 }

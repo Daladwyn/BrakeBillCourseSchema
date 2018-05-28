@@ -17,6 +17,12 @@
        UpdateTargetId= "StudentId" + Model.StudentId,
        InsertionMode= InsertionMode.ReplaceWith
    }) |
+    @Ajax.ActionLink("List Assignment", "StudentListAssignment", "Student", new { id = Model.StudentId },
+  ajaxOptions: new AjaxOptions
+  {
+      UpdateTargetId= "StudentId" + Model.StudentId,
+      InsertionMode= InsertionMode.ReplaceWith
+  }) |
     @Ajax.ActionLink("Delete", "StudentDelete", "Student", new { id = Model.StudentId },
     ajaxOptions: new AjaxOptions
    {

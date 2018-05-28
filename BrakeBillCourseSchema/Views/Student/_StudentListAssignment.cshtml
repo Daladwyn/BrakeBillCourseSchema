@@ -9,17 +9,17 @@
     </li>
     <li class="col-md-6">
         @*foreach (var item in Model.StudentCourses)
-        {
-            @Html.Label("Name:") @item.Name
-            
+            {
+                @Html.Label("Name:") @item.Name
 
-            @*Html.RenderPartial("_ShowStudentCourses",item)
+
+                @*Html.RenderPartial("_ShowStudentCourses",item)*@
         }
         @*Show Partialview with all the courses the student is signed up for. Html.DisplayFor(modelItem => item.)
         *@
 
 
-        @Ajax.ActionLink("Hide Courses", "ShowStudent", "Student", new { id = Model.StudentId },
+        @Ajax.ActionLink("Hide Assignments", "ShowStudent", "Student", new { id = Model.StudentId },
        ajaxOptions: new AjaxOptions
        {
            UpdateTargetId= "StudentId" + Model.StudentId,
@@ -29,12 +29,13 @@
     </li>
     <li class="rowbreak"></li>
     <li class="col-md-12">
-        @foreach (var item in Model.StudentCourses)
+        @foreach (var item in Model.StudentAssignments)
         {
-            <li class="col-md-2">Course name:</li>
+            <li class="col-md-2">Assignment:</li>
             <li class="col-md-5">@item.Name</li>
-            @*<li class="col-md-5"> teacher</li>*@
+            <li class="col-md-5">@item.Description</li>
             <li class="rowbreak"></li>
         }
     
 </ul>
+

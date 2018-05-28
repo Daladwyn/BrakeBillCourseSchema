@@ -224,6 +224,7 @@
     <Content Include="Views\Shared\_TeacherList.cshtml" />
     <Content Include="Views\Shared\_StudentListCourses.cshtml" />
     <Content Include="Views\Student\_ShowStudent.cshtml" />
+    <Content Include="Views\Student\_StudentListAssignment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

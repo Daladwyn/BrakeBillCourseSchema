@@ -25,7 +25,7 @@ namespace BrakeBillCourseSchema.Migrations
             new Student() { StudentId = 1, Firstname = "Mats", Lastname = "Nilsson" });
 
             context.Teachers.AddOrUpdate(t => t.Firstname,
-            new Teacher() { Firstname = "Jerker", Lastname = "Svensson" });
+            new Teacher() { Firstname = "Jerker", Lastname = "Svensson",  });
 
             context.Courses.AddOrUpdate(c => c.CourseId,
             new Course() { CourseId = 1, Name = "Transformation101", TeacherId = 0, Description = "Transformation 101: how to transform a mouse into a Lamp." });
