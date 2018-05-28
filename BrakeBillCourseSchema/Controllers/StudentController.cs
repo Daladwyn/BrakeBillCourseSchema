@@ -28,6 +28,7 @@ namespace BrakeBillCourseSchema.Controllers
             };
             return PartialView("_StudentListAssignment", studentToShow);
         }
+
         public ActionResult StudentListCourses(int id)
         {
             List<Course> coursesToShow = new List<Course>();
@@ -90,7 +91,8 @@ namespace BrakeBillCourseSchema.Controllers
                 using (var context = new context())
                 {
                     Course CourseToAdd = context.Courses.SingleOrDefault(c => c.CourseId == Courseid);
-
+                    List<Assignment> AssignmentToAdd = new List<Assignment>();
+                    AssignmentToAdd.Add(context.Assignments.Find(a => a.CourseId == Courseid));
                     // Adding assignments to the student, NOT COMPLETE!!!!!
                     //CourseToAdd.CourseAssignments.Add(context.Assignments.Where(Assignments))
                     newStudent.StudentCourses.Add(CourseToAdd);
