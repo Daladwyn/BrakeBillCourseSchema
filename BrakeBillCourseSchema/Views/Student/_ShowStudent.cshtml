@@ -1,33 +1,35 @@
 ﻿@model BrakeBillCourseSchema.Models.Student
 
-<li class="col-md-3">
-    @Html.DisplayFor(modelItem => Model.Firstname)
-</li>
-<li class="col-md-3">
-    @Html.DisplayFor(modelItem => Model.Lastname)
-</li>
-<li class="col-md-6">
-    @*Show Partialview with all the courses the student is signed up for. Html.DisplayFor(modelItem => item.)
-    *@
+<ul class="row" id="@("StudentId" + Model.StudentId)">
+    <li class="col-md-3">
+        @Html.DisplayFor(modelItem => Model.Firstname)
+    </li>
+    <li class="col-md-3">
+        @Html.DisplayFor(modelItem => Model.Lastname)
+    </li>
+    <li class="col-md-6">
+        @*Show Partialview with all the courses the student is signed up for. Html.DisplayFor(modelItem => item.)
 
-    @Html.ActionLink("Edit", "StudentEdit", "Student", new { id = Model.StudentId }) |
-    @Ajax.ActionLink("List Courses", "StudentListCourses", "Student", new { id = Model.StudentId },
-   ajaxOptions: new AjaxOptions
-   {
-       UpdateTargetId= "StudentId" + Model.StudentId,
-       InsertionMode= InsertionMode.ReplaceWith
-   }) |
-    @Ajax.ActionLink("List Assignment", "StudentListAssignment", "Student", new { id = Model.StudentId },
-  ajaxOptions: new AjaxOptions
-  {
-      UpdateTargetId= "StudentId" + Model.StudentId,
-      InsertionMode= InsertionMode.ReplaceWith
-  }) |
-    @Ajax.ActionLink("Delete", "StudentDelete", "Student", new { id = Model.StudentId },
-    ajaxOptions: new AjaxOptions
-   {
-       UpdateTargetId= "StudentId" + Model.StudentId,
-       InsertionMode= InsertionMode.ReplaceWith
-   })
-</li>
-<li class="rowbreak"></li>
+
+        @Html.ActionLink("Edit", "StudentEdit", "Student", new { id = Model.StudentId }) | *@
+        @Ajax.ActionLink("List Courses", "StudentListCourses", "Student", new { id = Model.StudentId },
+       ajaxOptions: new AjaxOptions
+       {
+           UpdateTargetId= "StudentId" + Model.StudentId,
+           InsertionMode= InsertionMode.ReplaceWith
+       }) |
+        @Ajax.ActionLink("List Assignment", "StudentListAssignment", "Student", new { id = Model.StudentId },
+      ajaxOptions: new AjaxOptions
+      {
+          UpdateTargetId= "StudentId" + Model.StudentId,
+          InsertionMode= InsertionMode.ReplaceWith
+      }) |
+        @Ajax.ActionLink("Delete", "StudentDelete", "Student", new { id = Model.StudentId },
+        ajaxOptions: new AjaxOptions
+       {
+           UpdateTargetId= "StudentId" + Model.StudentId,
+           InsertionMode= InsertionMode.ReplaceWith
+       })
+    </li>
+    <li class="rowbreak"></li>
+</ul>

@@ -22,9 +22,9 @@
     </ul>
     @foreach (var item in Model)
     {
-        <ul class="row" id="@("StudentId" + item.StudentId)">
+        
            @Html.Action("ShowStudent","Student", new { id = item.StudentId })
-        </ul>
+        
     }
     <div id="EndOfStudents"></div>
 </div>

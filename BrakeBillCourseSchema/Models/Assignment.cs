@@ -14,12 +14,10 @@ namespace BrakeBillCourseSchema.Models
         public int AssignmentId { get; set; }
         [Required]
         [MaxLength(20)]
-        public string Name { get; set; }
+        public string AssignmentName { get; set; }
         [Required]
-       // [ForeignKey("CourseId")]
         public int CourseId { get; set; }
         [Required]
-        //[ForeignKey("StudentId")]
         public int StudentId { get; set; }
         [Required]
         [MaxLength(250)]

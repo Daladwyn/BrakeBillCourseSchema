@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using BrakeBillCourseSchema.Models;
+using System.Data.SqlClient;
 
 namespace BrakeBillCourseSchema.Controllers
 {
@@ -17,7 +18,7 @@ namespace BrakeBillCourseSchema.Controllers
             Student studentToShow = new Student();
             using (var context = new context())
             {
-                studentToShow = context.Students.SingleOrDefault(s => s.StudentId == id);
+                studentToShow = context.Students.Include("StudentAssignments").SingleOrDefault(s => s.StudentId == id);
                 foreach (var assignment in context.Assignments)
                 {
                     if (assignment.StudentId == studentToShow.StudentId)
@@ -31,24 +32,23 @@ namespace BrakeBillCourseSchema.Controllers
 
         public ActionResult StudentListCourses(int id)
         {
-            List<Course> coursesToShow = new List<Course>();
-            Student studentToShow = new Student();
+            //List<Course> coursesToShow = new List<Course>();
             using (var context = new context())
             {
-                studentToShow = context.Students.SingleOrDefault(s => s.StudentId == id);
-                foreach (var courseitem in context.Courses)
-                {
-                    foreach (var student in courseitem.CourseStudents)
-                    {
-                        if (student.StudentId == studentToShow.StudentId)
-                        {
-                            studentToShow.StudentCourses.Add(courseitem);
-                        }
-                    }
-                    //coursesToShow.Add(context.Courses.Include("Students").Where(s => s.StudentId == id).ToList();
-                }
+                Student studentToShow = context.Students.Include("StudentCourses").SingleOrDefault(s => s.StudentId == id);
+                //foreach (var courseitem in context.Courses)
+                //{
+                //    foreach (var student in courseitem.CourseStudents)
+                //    {
+                //        if (student.StudentId == studentToShow.StudentId)
+                //        {
+                //            studentToShow.StudentCourses.Add(courseitem);
+                //        }
+                //    }
+                //    //coursesToShow.Add(context.Courses.Include("Students").Where(s => s.StudentId == id).ToList();
+                //}
+                return PartialView("_StudentListCourses", studentToShow);
             };
-            return PartialView("_StudentListCourses", studentToShow);
         }
 
         // GET: Student
@@ -90,13 +90,16 @@ namespace BrakeBillCourseSchema.Controllers
             {
                 using (var context = new context())
                 {
-                    Course CourseToAdd = context.Courses.SingleOrDefault(c => c.CourseId == Courseid);
-                    List<Assignment> AssignmentToAdd = new List<Assignment>();
-                    AssignmentToAdd.Add(context.Assignments.Find(a => a.CourseId == Courseid));
-                    // Adding assignments to the student, NOT COMPLETE!!!!!
-                    //CourseToAdd.CourseAssignments.Add(context.Assignments.Where(Assignments))
+                    Course CourseToAdd = context.Courses.Include("CourseStudents").Include("CourseAssignments").SingleOrDefault(c => c.CourseId == Courseid);
+                    //CourseToAdd.CourseStudents.Add(newStudent);
+                    //CourseToAdd.CourseAssignments = context.Assignments.SqlQuery("SELECT * FROM Assignments WHERE CourseId=@id", new SqlParameter("@id", Courseid)).ToList();
+                    //context.Courses.Add(CourseToAdd);
+
                     newStudent.StudentCourses.Add(CourseToAdd);
+                    newStudent.StudentAssignments = context.Assignments.SqlQuery("SELECT * FROM Assignments WHERE CourseId=@id", new SqlParameter("@id", Courseid)).ToList();
                     context.Students.Add(newStudent);
+                    //newStudent.StudentAssignments = AssignmentsToAdd;
+                    //newStudent.StudentCourses.Add(CourseToAdd);
                     newStudent = null;
                     context.SaveChanges();
                 }

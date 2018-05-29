@@ -21,18 +21,20 @@ namespace BrakeBillCourseSchema.Migrations
             //  to avoid creating duplicate seed data.
 
             context.Students.AddOrUpdate(s => s.StudentId,
-            new Student() { StudentId = 0, Firstname = "Sara", Lastname = "Johansson" },
-            new Student() { StudentId = 1, Firstname = "Mats", Lastname = "Nilsson" });
+            new Student() { StudentId = 1, Firstname = "Sara", Lastname = "Johansson" },
+            new Student() { StudentId = 2, Firstname = "Mats", Lastname = "Nilsson" });
 
             context.Teachers.AddOrUpdate(t => t.Firstname,
             new Teacher() { Firstname = "Jerker", Lastname = "Svensson",  });
 
+            context.SaveChanges();
+
             context.Courses.AddOrUpdate(c => c.CourseId,
-            new Course() { CourseId = 1, Name = "Transformation101", TeacherId = 0, Description = "Transformation 101: how to transform a mouse into a Lamp." });
+            new Course() { CourseId = 1, CourseName = "Transformation101", TeacherId = 1, Description = "Transformation 101: how to transform a mouse into a Lamp." });
 
-
+            context.SaveChanges();
             context.Assignments.AddOrUpdate(a => a.AssignmentId,
-            new Assignment { AssignmentId = 0, Name = "Transformation1", CourseId = 1, StudentId = 0, Description = "Assignment1 in Transformation. How to transform a mouse into a Lamp.", IsCompletedByStudent = false });
+            new Assignment { AssignmentId = 1, AssignmentName = "Transformation1", CourseId = 1, StudentId = 1, Description = "Assignment1 in Transformation. How to transform a mouse into a Lamp.", IsCompletedByStudent = false });
             context.SaveChanges();
         }
     }

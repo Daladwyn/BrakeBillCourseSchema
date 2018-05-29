@@ -7,35 +7,22 @@
     <li class="col-md-3">
         @Html.DisplayFor(modelItem => Model.Lastname)
     </li>
-    <li class="col-md-6">
-        @*foreach (var item in Model.StudentCourses)
-            {
-                @Html.Label("Name:") @item.Name
-
-
-                @*Html.RenderPartial("_ShowStudentCourses",item)*@
-        }
-        @*Show Partialview with all the courses the student is signed up for. Html.DisplayFor(modelItem => item.)
-        *@
-
-
+    <li class="col-md-3">
         @Ajax.ActionLink("Hide Assignments", "ShowStudent", "Student", new { id = Model.StudentId },
-       ajaxOptions: new AjaxOptions
-       {
-           UpdateTargetId= "StudentId" + Model.StudentId,
-           InsertionMode= InsertionMode.ReplaceWith
-       }) |
-
+            ajaxOptions: new AjaxOptions
+            {
+                UpdateTargetId= "StudentId" + Model.StudentId,
+                InsertionMode= InsertionMode.ReplaceWith
+           })
     </li>
+    <li class="col-md-3"></li>
     <li class="rowbreak"></li>
-    <li class="col-md-12">
-        @foreach (var item in Model.StudentAssignments)
-        {
-            <li class="col-md-2">Assignment:</li>
-            <li class="col-md-5">@item.Name</li>
-            <li class="col-md-5">@item.Description</li>
-            <li class="rowbreak"></li>
-        }
-    
+    @foreach (var item in Model.StudentAssignments)
+    {
+        <li class="row"></li>
+        <li class="col-md-2">Assignment:</li>
+        <li class="col-md-5">@item.AssignmentName</li>
+        <li class="col-md-5">@item.Description</li>
+        <li class="rowbreak"></li>
+    }
 </ul>
-
