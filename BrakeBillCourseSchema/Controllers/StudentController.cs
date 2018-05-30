@@ -90,18 +90,17 @@ namespace BrakeBillCourseSchema.Controllers
             {
                 using (var context = new context())
                 {
-                    Course CourseToAdd = context.Courses.Include("CourseStudents").Include("CourseAssignments").SingleOrDefault(c => c.CourseId == Courseid);
-                    //CourseToAdd.CourseStudents.Add(newStudent);
-                    //CourseToAdd.CourseAssignments = context.Assignments.SqlQuery("SELECT * FROM Assignments WHERE CourseId=@id", new SqlParameter("@id", Courseid)).ToList();
-                    //context.Courses.Add(CourseToAdd);
 
-                    newStudent.StudentCourses.Add(CourseToAdd);
+                    newStudent.StudentCourses = context.Courses.SqlQuery("SELECT * FROM Courses WHERE CourseId=@id", new SqlParameter("@id", Courseid)).ToList();
                     newStudent.StudentAssignments = context.Assignments.SqlQuery("SELECT * FROM Assignments WHERE CourseId=@id", new SqlParameter("@id", Courseid)).ToList();
+                    foreach (var Assignment in newStudent.StudentAssignments)
+                    {
+                        Assignment.StudentId = 999999999;
+                    }
                     context.Students.Add(newStudent);
-                    //newStudent.StudentAssignments = AssignmentsToAdd;
-                    //newStudent.StudentCourses.Add(CourseToAdd);
-                    newStudent = null;
+                    //newStudent = null;
                     context.SaveChanges();
+                    newStudent.StudentId= context.Students.SqlQuery("SELECT * FROM Students WHERE // ")//Här söks eleven upp med med för och efternamn och StudentId som sedan skall användas att sättas till AssingmentId.Studentid
                 }
                 return View("students");
             }
