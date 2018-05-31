@@ -25,7 +25,7 @@ namespace BrakeBillCourseSchema.Migrations
             new Student() { StudentId = 2, Firstname = "Mats", Lastname = "Nilsson" });
 
             context.Teachers.AddOrUpdate(t => t.Firstname,
-            new Teacher() { Firstname = "Jerker", Lastname = "Svensson",  });
+            new Teacher() { Firstname = "Jerker", Lastname = "Svensson", });
 
             context.SaveChanges();
 
@@ -34,7 +34,12 @@ namespace BrakeBillCourseSchema.Migrations
 
             context.SaveChanges();
             context.Assignments.AddOrUpdate(a => a.AssignmentId,
-            new Assignment { AssignmentId = 1, AssignmentName = "Transformation1", CourseId = 1, StudentId = 1, Description = "Assignment1 in Transformation. How to transform a mouse into a Lamp.", IsCompletedByStudent = false });
+            new Assignment() { AssignmentName = "Transformation1", CourseId = 1, StudentId = 1, Description = "Assignment1 in Transformation. How to transform a mouse into a Lamp.", IsTemplateAssignment = true, IsCompletedByStudent = false },
+            new Assignment() { AssignmentName = "Transformation1", CourseId = 1, StudentId = 1, Description = "Assignment1 in Transformation. How to transform a mouse into a Lamp.", IsTemplateAssignment = true, IsCompletedByStudent = false },
+            new Assignment() { AssignmentName = "Transformation1", CourseId = 1, StudentId = 1, Description = "Assignment1 in Transformation. How to transform a mouse into a Lamp.", IsTemplateAssignment = false, IsCompletedByStudent = false },
+            new Assignment() { AssignmentName = "Transformation1", CourseId = 1, StudentId = 1, Description = "Assignment1 in Transformation. How to transform a mouse into a Lamp.", IsTemplateAssignment = false, IsCompletedByStudent = false },
+            new Assignment() { AssignmentName = "Transformation1", CourseId = 1, StudentId = 2, Description = "Assignment1 in Transformation. How to transform a mouse into a Lamp.", IsTemplateAssignment = false, IsCompletedByStudent = false },
+            new Assignment() { AssignmentName = "Transformation1", CourseId = 1, StudentId = 2, Description = "Assignment1 in Transformation. How to transform a mouse into a Lamp.", IsTemplateAssignment = false, IsCompletedByStudent = false });
             context.SaveChanges();
         }
     }

@@ -88,19 +88,26 @@ namespace BrakeBillCourseSchema.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 using (var context = new context())
                 {
+                    context.Students.Add(newStudent);
+                    context.SaveChanges();
 
+                    //var lastRegisteredStudent = context.Students.SqlQuery("SELECT MAX(StudentId) AS lastRegisteredStudent FROM Students ");
+                    //newStudent.StudentId = context.Students.SingleOrDefault()
+
+                    //newStudent.StudentId = Convert.ToInt32(lastRegisteredStudent);
                     newStudent.StudentCourses = context.Courses.SqlQuery("SELECT * FROM Courses WHERE CourseId=@id", new SqlParameter("@id", Courseid)).ToList();
-                    newStudent.StudentAssignments = context.Assignments.SqlQuery("SELECT * FROM Assignments WHERE CourseId=@id", new SqlParameter("@id", Courseid)).ToList();
+                    newStudent.StudentAssignments = context.Assignments.SqlQuery("SELECT * FROM Assignments WHERE CourseId=@id AND IsTemplateAssignment=true", new SqlParameter("@id", Courseid)).ToList();
                     foreach (var Assignment in newStudent.StudentAssignments)
                     {
-                        Assignment.StudentId = 999999999;
+                        Assignment.StudentId = newStudent.StudentId;
                     }
-                    context.Students.Add(newStudent);
+                    //context.Students.Add(newStudent);
                     //newStudent = null;
                     context.SaveChanges();
-                    newStudent.StudentId= context.Students.SqlQuery("SELECT * FROM Students WHERE // ")//Här söks eleven upp med med för och efternamn och StudentId som sedan skall användas att sättas till AssingmentId.Studentid
+                    //newStudent.StudentId= context.Students.SqlQuery("SELECT * FROM Students WHERE // ")//Här söks eleven upp med med för och efternamn och StudentId som sedan skall användas att sättas till AssingmentId.Studentid
                 }
                 return View("students");
             }
