@@ -88,26 +88,36 @@ namespace BrakeBillCourseSchema.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 using (var context = new context())
                 {
-                    context.Students.Add(newStudent);
-                    context.SaveChanges();
-
-                    //var lastRegisteredStudent = context.Students.SqlQuery("SELECT MAX(StudentId) AS lastRegisteredStudent FROM Students ");
-                    //newStudent.StudentId = context.Students.SingleOrDefault()
-
-                    //newStudent.StudentId = Convert.ToInt32(lastRegisteredStudent);
-                    newStudent.StudentCourses = context.Courses.SqlQuery("SELECT * FROM Courses WHERE CourseId=@id", new SqlParameter("@id", Courseid)).ToList();
-                    newStudent.StudentAssignments = context.Assignments.SqlQuery("SELECT * FROM Assignments WHERE CourseId=@id AND IsTemplateAssignment=true", new SqlParameter("@id", Courseid)).ToList();
-                    foreach (var Assignment in newStudent.StudentAssignments)
+                    context.Students.Add(newStudent); //save name of student and get a Studentid in return from database
+                    int numberOfChanges = context.SaveChanges(); //get hold of how many objects that was saved.
+                    if (numberOfChanges >= 1) //if more than one is returned the save was a success and fetch then relevant data from database
                     {
-                        Assignment.StudentId = newStudent.StudentId;
+                        newStudent.StudentCourses = context.Courses.SqlQuery("SELECT * FROM Courses WHERE CourseId=@id", new SqlParameter("@id", Courseid)).ToList();
+                        newStudent.StudentAssignments = context.Assignments.SqlQuery("SELECT * FROM Assignments WHERE CourseId=@id AND IsTemplateAssignment='True'", new SqlParameter("@id", Courseid)).ToList();
+                        int numberOfAssignments = newStudent.StudentAssignments.Count();//get hold of how many assignments the course have
+                        for (int i = 0; i < numberOfAssignments; i++) //for each assignment create another and copy over the relevant info from the assingment template
+                        {
+                            Assignment newAssignment = new Assignment();
+                            newAssignment.AssignmentName = newStudent.StudentAssignments[i].AssignmentName;
+                            newAssignment.CourseId = newStudent.StudentAssignments[i].CourseId;
+                            newAssignment.Description = newStudent.StudentAssignments[i].Description;
+                            newAssignment.IsCompletedByStudent = false;
+                            newAssignment.IsTemplateAssignment = false;
+                            newAssignment.StudentId = newStudent.StudentId;
+                            newStudent.StudentAssignments.Add(newAssignment);//add the new assignment to the list of assignments
+                        }
+                        for (int i = 0; i < numberOfAssignments; i++) //Remove the template assignments
+                        {
+                            if (newStudent.StudentAssignments[i].AssignmentId != 0)
+                            {
+                                newStudent.StudentAssignments.Remove(newStudent.StudentAssignments[i]);
+                                i--;
+                            }
+                        }
                     }
-                    //context.Students.Add(newStudent);
-                    //newStudent = null;
                     context.SaveChanges();
-                    //newStudent.StudentId= context.Students.SqlQuery("SELECT * FROM Students WHERE // ")//Här söks eleven upp med med för och efternamn och StudentId som sedan skall användas att sättas till AssingmentId.Studentid
                 }
                 return View("students");
             }
