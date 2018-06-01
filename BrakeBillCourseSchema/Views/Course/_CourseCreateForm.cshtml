@@ -1,0 +1,56 @@
+﻿@model BrakeBillCourseSchema.Models.Course
+
+@using (Ajax.BeginForm("CourseCreate", "Course",
+ajaxOptions: new AjaxOptions
+{
+    UpdateTargetId = "CourseCreate",
+    InsertionMode = InsertionMode.ReplaceWith,
+}))
+{
+    <div class="form-horizontal">
+        <h4>Create a new Course:</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    Course Name @Html.Editor("CourseName")
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    Course Description: @Html.Editor("Description")
+                </div>
+            </div>
+            @* <div class="form-group">
+
+                    <div class="col-md-3">
+                        Which course to attend: <select name="Courseid">
+                            @foreach (var item in Model)
+                            {
+                                <option value="@item.CourseId">@item.CourseName</option>
+                            }
+                        </select>
+                    </div>
+                </div>*@
+            <div class=" col-md-3">
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Ajax.ActionLink("Cancel course creation", "Index", "Course",
+    ajaxOptions: new AjaxOptions
+    {
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "CourseCreate",
+    })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

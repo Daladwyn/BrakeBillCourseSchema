@@ -7,32 +7,22 @@
 <h2>Courses</h2>
 
 <div id="CourseCreate">
-    @Html.ActionLink("Create New Course", "CourseCreate" , "Course")
+    @Html.ActionLink("Create New Course", "CourseCreateForm", "Course")
 </div>
 <div class="table">
-    <div>
-        <div>
-            @Html.DisplayNameFor(model => model.Name)
+    <div class="row">
+        <div class="col-md-3">
+            @Html.DisplayNameFor(model => model.CourseName)
         </div>
-        <div>
-            @Html.DisplayNameFor(model => model.hasTeacher)
+        <div class="col-md-3">
+            @Html.DisplayNameFor(model => model.TeacherId)
         </div>
         <div></div>
     </div>
 
 @foreach (var item in Model) {
-    <div id="@"CourseId" + item.Id">
-        <div>
-            @Html.DisplayFor(modelItem => item.Name)
-        </div>
-        <div>
-            @Html.DisplayFor(modelItem => item.hasTeacher)
-        </div>
-        <div>
-            @Html.ActionLink("Edit", "CourseEdit", "Course", new { id=item.Id }) |
-            @Html.ActionLink("Details", "CourseDetails", "Course", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "CourseDelete", "Course", new { id=item.Id })
-        </div>
+    <div id="@("CourseId" + item.CourseId)">
+        @Html.Action("ListACourse", "Course", new { id = item.CourseId })
     </div>
 }
 

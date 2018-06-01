@@ -14,7 +14,7 @@ namespace BrakeBillCourseSchema.Controllers
     {
         public ActionResult StudentListAssignment(int id)
         {
-            List<Assignment> AssignmentsToShow = new List<Assignment>();
+            //List<Assignment> AssignmentsToShow = new List<Assignment>();
             Student studentToShow = new Student();
             using (var context = new context())
             {
@@ -119,9 +119,9 @@ namespace BrakeBillCourseSchema.Controllers
                     }
                     context.SaveChanges();
                 }
-                return View("students");
+                return RedirectToAction("Students", "Home");
             }
-            return RedirectToAction("students", "Home");
+            return RedirectToAction("Students", "Home");
         }
 
 

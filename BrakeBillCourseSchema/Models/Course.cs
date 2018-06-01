@@ -14,8 +14,10 @@ namespace BrakeBillCourseSchema.Models
         public int CourseId { get; set; }
         [MaxLength(20)]
         [Required]
+        [Display(Name ="Course Name")]
         public string CourseName { get; set; }
-        [Required]
+        
+        [Display(Name ="Responsible Teacher")]
         public int TeacherId { get; set; }
         [Required]
         [MaxLength(100)]

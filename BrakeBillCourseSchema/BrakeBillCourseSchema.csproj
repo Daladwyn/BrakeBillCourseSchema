@@ -225,11 +225,12 @@
     <Content Include="Views\Shared\_StudentListCourses.cshtml" />
     <Content Include="Views\Student\_ShowStudent.cshtml" />
     <Content Include="Views\Student\_StudentListAssignment.cshtml" />
+    <Content Include="Views\Course\_ListACourse.cshtml" />
+    <Content Include="Views\Course\_CourseCreateForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Assignment\" />
-    <Folder Include="Views\Course\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -18,7 +18,7 @@
 </ul>
 @foreach (var item in Model)
 {
-    <ul class="row" id="@(" TeacherId" + item.TeacherId)">
+    <ul class="row" id="@("TeacherId" + item.TeacherId)">
         @Html.Action("Teacherlist", "Teacher", new { id = item.TeacherId })
     </ul>
 }

@@ -25,24 +25,19 @@ namespace BrakeBillCourseSchema.Controllers
                 {
                     presentStudents.Add(context.Students.Find(item.StudentId));
                 }
-
-
-                return View("Students", presentStudents);
             }
+            return View("Students", presentStudents);
         }
 
-        public ActionResult Teachers(int Teacherid)
+        public ActionResult Teachers()
         {
             ViewBag.Message = "Brakebills teachers.";
             List<Teacher> presentTeachers = new List<Teacher>();
             using (var context = new context())
             {
-                Teacher teacherToAdd = new Teacher();
                 foreach (var item in context.Teachers)
                 {
-                    teacherToAdd = context.Teachers.Include("Courses").SingleOrDefault(t => t.TeacherId == item.TeacherId);
-                    //Hotels.Include("Rooms").SingleOrDefault(h => h.Id == id);
-                    presentTeachers.Add(teacherToAdd);
+                    presentTeachers.Add(context.Teachers.Find(item.TeacherId));
                 }
             }
             return View("Teachers", presentTeachers);
@@ -51,6 +46,7 @@ namespace BrakeBillCourseSchema.Controllers
         public ActionResult Courses()
         {
             ViewBag.Message = "Brakebills Course Programme.";
+            
             List<Course> presentCourses = new List<Course>();
             using (var context = new context())
             {
@@ -59,13 +55,21 @@ namespace BrakeBillCourseSchema.Controllers
                     presentCourses.Add(context.Courses.Find(item.CourseId));
                 }
             }
-            return View();
+            return View("Courses", presentCourses);
         }
 
         public ActionResult Assignments()
         {
             ViewBag.Message = "Brakebills Course Assignments.";
-            return View();
+            List<Assignment> presentAssignments = new List<Assignment>();
+            using (var context = new context())
+            {
+                foreach (var item in context.Assignments)
+                {
+                    presentAssignments.Add(context.Assignments.Include("Students").Include("Courses").SingleOrDefault(a => a.AssignmentId));
+                }
+            }
+            return View("Assignments", presentAssignments);
         }
     }
 }

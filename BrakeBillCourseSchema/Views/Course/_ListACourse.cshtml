@@ -1,0 +1,14 @@
+﻿@model BrakeBillCourseSchema.Models.Course
+
+<div class="col-md-3">
+    @Html.DisplayFor(modelItem => Model.CourseName)
+</div>
+<div class="col-md-3">
+    @*Html.DisplayFor(modelItem => Model. .Firstname)
+    @Html.DisplayFor(modelItem => Model.Teachers.Lastname)*@
+</div>
+<div class="col-md-6">
+    @Html.ActionLink("Edit", "CourseEdit", "Course", new { id = Model.CourseId }) |
+    @Html.ActionLink("Course Description", "CourseDescription", "Course", new { id = Model.CourseId }) |
+    @Html.ActionLink("Delete", "CourseDelete", "Course", new { id = Model.CourseId })
+</div>

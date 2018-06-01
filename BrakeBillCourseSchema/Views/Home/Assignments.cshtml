@@ -10,43 +10,41 @@
     @Html.ActionLink("Create New Assignment", "AssignmentCreate", "Assignment")
 </div>
 <div class="table">
-    <div>
-        <div>
-            @Html.DisplayNameFor(model => model.Name)
+    <div class="row">
+        <div class="col-md-3">
+            @Html.DisplayNameFor(model => model.AssignmentName)
         </div>
-        <div>
-            @Html.DisplayNameFor(model => model.ToCourse)
+        <div class="col-md-3">
+            @Html.DisplayNameFor(model => model.CourseId)
         </div>
-        <div>
-            @Html.DisplayNameFor(model => model.isCompletedByStudent)
+        <div class="col-md-2">
+            @Html.DisplayNameFor(model => model.StudentId)
         </div>
-        <div>
-            @Html.DisplayNameFor(model => model.ToStudent)
+        <div class="col-md-1">
+            @Html.DisplayNameFor(model => model.IsCompletedByStudent)
         </div>
-        <div>
-           @* @Html.DisplayNameFor(model => model.Description)*@ Show Description
-        </div>
-        <div></div>
+       
+        <div class="col-md-3"></div>
     </div>
 
 @foreach (var item in Model) {
-    <div id="@"AssignmentId" + item.Id">
-        <div>
-            @Html.DisplayFor(modelItem => item.Name)
+    <div class="row" id="@("AssignmentId" + item.AssignmentId)">
+        <div class="col-md-3">
+            @Html.DisplayFor(modelItem => item.AssignmentName)
         </div>
-        <div>
-            @Html.DisplayFor(modelItem => item.ToCourse)
+        <div class="col-md-3">
+            @Html.DisplayFor(modelItem => item.CourseId)
         </div>
-        <div>
-            @Html.DisplayFor(modelItem => item.isCompletedByStudent)
+        <div class="col-md-2">
+            @Html.DisplayFor(modelItem => item.StudentId)
         </div>
-        <div>
-            @Html.DisplayFor(modelItem => item.ToStudent)
+        <div class="col-md-1">
+            @Html.DisplayFor(modelItem => item.IsCompletedByStudent)
         </div>
-        <div>
-            @Html.ActionLink("Edit", "AssignmentEdit","Assignment", new { id = item.Id }) |
-            @Html.ActionLink("Show description", "AssignmentDescription", "Assignment", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "AssignmentDelete", "Assignment", new { id = item.Id })
+        <div class="col-md-3">
+            @Html.ActionLink("Edit", "AssignmentEdit","Assignment", new { id = item.AssignmentId }) |
+            @Html.ActionLink("Show description", "AssignmentDescription", "Assignment", new { id = item.AssignmentId }) |
+            @Html.ActionLink("Delete", "AssignmentDelete", "Assignment", new { id = item.AssignmentId })
             
         </div>
     </div>
