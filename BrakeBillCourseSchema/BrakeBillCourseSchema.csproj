@@ -227,10 +227,12 @@
     <Content Include="Views\Student\_StudentListAssignment.cshtml" />
     <Content Include="Views\Course\_ListACourse.cshtml" />
     <Content Include="Views\Course\_CourseCreateForm.cshtml" />
+    <Content Include="Views\Shared\_CourseCreate.cshtml" />
+    <Content Include="Views\Shared\_AssignmentCreate.cshtml" />
+    <Content Include="Views\Assignment\_AssignmentCreateForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Assignment\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

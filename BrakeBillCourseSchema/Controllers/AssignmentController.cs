@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BrakeBillCourseSchema.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -29,9 +30,37 @@ namespace BrakeBillCourseSchema.Controllers
             return PartialView();
         }
 
-        public ActionResult AssignmentCreate()
+        public ActionResult AssignmentCreateForm()
         {
-            return PartialView();
+            List<Course> presentCourses = new List<Course>();
+            using (var context = new context())
+            {
+                foreach (var item in context.Courses)
+                {
+                    presentCourses.Add(context.Courses.Find(item.CourseId));
+                }
+            }
+            return PartialView("_AssignmentCreateForm", presentCourses);
+        }
+
+        public ActionResult AssignmentCreate([Bind(Include = "AssingmentName, Description")] Assignment newAssignmet, int Courseid)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var context = new context())
+                {
+                    context.Assignments.Add(newAssignmet);
+                    newAssignmet.CourseId = Courseid;
+                    newAssignmet.StudentId = 999999;
+                    newAssignmet.IsTemplateAssignment = true;
+                    newAssignmet.IsCompletedByStudent = false;
+                    context.Assignments.Add(newAssignmet);
+                    context.SaveChanges();
+
+                }
+
+            }
+            return RedirectToAction("Assignments", "Home");
         }
     }
 }
