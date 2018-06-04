@@ -43,22 +43,20 @@ namespace BrakeBillCourseSchema.Controllers
             return PartialView("_AssignmentCreateForm", presentCourses);
         }
 
-        public ActionResult AssignmentCreate([Bind(Include = "AssingmentName, Description")] Assignment newAssignmet, int Courseid)
+        public ActionResult AssignmentCreate([Bind(Include = "AssignmentName, Description")] Assignment newAssignmet, int Courseid)
         {
+            newAssignmet.CourseId = Courseid;
+            newAssignmet.StudentId = 999999;
+            newAssignmet.IsTemplateAssignment = true;
+            newAssignmet.IsCompletedByStudent = false;
             if (ModelState.IsValid)
             {
                 using (var context = new context())
                 {
                     context.Assignments.Add(newAssignmet);
-                    newAssignmet.CourseId = Courseid;
-                    newAssignmet.StudentId = 999999;
-                    newAssignmet.IsTemplateAssignment = true;
-                    newAssignmet.IsCompletedByStudent = false;
-                    context.Assignments.Add(newAssignmet);
                     context.SaveChanges();
-
                 }
-
+                return RedirectToAction("Assignments", "Home");
             }
             return RedirectToAction("Assignments", "Home");
         }

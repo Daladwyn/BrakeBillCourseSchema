@@ -4,27 +4,30 @@
     ViewBag.Title = "Courses";
 }
 
-<h2>Courses</h2>
+<div id="CourseIndex">
+    <h2>Courses</h2>
 
-<div id="CourseCreate">
-    @Html.Partial("_CourseCreate")
-    @*Html.ActionLink("Create New Course", "CourseCreateForm", "Course")*@
-</div>
-<div class="table">
-    <div class="row">
-        <div class="col-md-3">
-            @Html.DisplayNameFor(model => model.CourseName)
-        </div>
-        <div class="col-md-3">
-            @Html.DisplayNameFor(model => model.TeacherId)
-        </div>
-        <div></div>
+    <div id="CourseCreate">
+        @Html.Partial("_CourseCreate")
+        @*Html.ActionLink("Create New Course", "CourseCreateForm", "Course")*@
     </div>
+    <div class="table">
+        <div class="row">
+            <div class="col-md-3">
+                @Html.DisplayNameFor(model => model.CourseName)
+            </div>
+            <div class="col-md-3">
+                @Html.DisplayNameFor(model => model.TeacherId)
+            </div>
+            <div></div>
+        </div>
 
-@foreach (var item in Model) {
-    <div id="@("CourseId" + item.CourseId)">
-        @Html.Action("ListACourse", "Course", new { id = item.CourseId })
+        @foreach (var item in Model)
+        {
+            <div id="@("CourseId" + item.CourseId)">
+                @Html.Action("ListACourse", "Course", new { id = item.CourseId })
+            </div>
+        }
+
     </div>
-}
-
 </div>
