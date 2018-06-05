@@ -19,7 +19,7 @@ namespace BrakeBillCourseSchema.Models
         [Required]
         [Display(Name="To Course")]
         public int CourseId { get; set; }
-        [Required]
+        //[Required]
         [Display (Name ="To Student")]
         public int StudentId { get; set; }
         [Required]

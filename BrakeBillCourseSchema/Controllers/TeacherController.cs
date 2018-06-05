@@ -1,6 +1,7 @@
 ﻿using BrakeBillCourseSchema.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -27,20 +28,25 @@ namespace BrakeBillCourseSchema.Controllers
             return PartialView("_TeacherCreateForm", presentCourses);
         }
 
-        public ActionResult TeacherCreate([Bind(Include = "Firstname,Lastname,id")] Teacher newTeacher)
+        public ActionResult TeacherCreate([Bind(Include = "Firstname,Lastname")] Teacher newTeacher, int Courseid)
         {
             if (ModelState.IsValid)
             {
                 using (var context = new context())
                 {
                     context.Teachers.Add(newTeacher);
-                    context.SaveChanges();
+                    int numberOfChanges = context.SaveChanges(); //get hold of how many objects that was saved.
+                    if (numberOfChanges >= 1) //if more than one is returned the save was a success and fetch then relevant data from database
+                    {
+                        newTeacher.TeachingInCourses = context.Courses.SqlQuery("SELECT * FROM Courses WHERE CourseId=@id", new SqlParameter("@id", Courseid)).ToList();
+                        context.SaveChanges();
+                    }
+                    return RedirectToAction("Teachers", "Home");
                 }
-                return PartialView("_TeacherCreate");
             }
             else
             {
-                return PartialView("_TeacherCreate");
+                return RedirectToAction("Teachers", "Home");
             }
         }
 

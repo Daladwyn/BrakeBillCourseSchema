@@ -46,7 +46,7 @@ namespace BrakeBillCourseSchema.Controllers
         public ActionResult AssignmentCreate([Bind(Include = "AssignmentName, Description")] Assignment newAssignmet, int Courseid)
         {
             newAssignmet.CourseId = Courseid;
-            newAssignmet.StudentId = 999999;
+            //newAssignmet.StudentId = 999999;
             newAssignmet.IsTemplateAssignment = true;
             newAssignmet.IsCompletedByStudent = false;
             if (ModelState.IsValid)

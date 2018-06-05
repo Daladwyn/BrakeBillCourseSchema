@@ -20,7 +20,7 @@ namespace BrakeBillCourseSchema.Controllers
         {
             Teacher CourseTeacher = new Teacher();
             Course presentCourse = new Course();
-            using(var context = new context())
+            using (var context = new context())
             {
                 //presentCourse = context.Courses.SqlQuery("SELECT * FROM Courses JOIN Teachers ON Courses.TeacherId=Teachers.TeachersId WHERE CourseId=@id", new SqlParameter ("@id", id)).;
                 presentCourse = context.Courses.SingleOrDefault(c => c.CourseId == id);
@@ -67,12 +67,44 @@ namespace BrakeBillCourseSchema.Controllers
 
         public ActionResult CourseDetails(int id)
         {
-            return PartialView();
+            using (var context = new context())
+            {
+
+
+                var presentCourseDetails = context.Courses.Include("CourseStudents").Include("CourseAssignments").SingleOrDefault(c => c.CourseId == id);
+                return PartialView("_CourseDetails", presentCourseDetails);
+            }
         }
 
-        public ActionResult CourseDelete(int id)
+        public ActionResult CourseTeacher(int id)
         {
-            return PartialView();
+            List<Teacher> AllTeachers = new List<Teacher>();
+            Teacher courseTeacher = new Teacher();
+            using (var context = new context())
+            {
+                // var courseTeacher = context.Teachers.SqlQuery("SELECT * FROM Teachers JOIN Courses ON Teachers.TeachingInCourse.CourseId=Courses.CourseId WHERE CourseId=@id", new SqlParameter("@id", id));
+                foreach (var teacher in context.Teachers.Include("TeachingInCourses"))
+                {
+                    AllTeachers.Add(teacher);
+                }
+            }
+            foreach (var teacher in AllTeachers)
+            {
+                foreach (var course in teacher.TeachingInCourses)
+                {
+                    if (course.CourseId == id)
+                    {
+                        courseTeacher.Firstname = teacher.Firstname;
+                        courseTeacher.Lastname = teacher.Lastname;
+                    }
+                }
+            }
+            return PartialView("_CourseTeacher", courseTeacher);
         }
+    public ActionResult CourseDelete(int id)
+    {
+        return PartialView();
     }
+    }
+
 }

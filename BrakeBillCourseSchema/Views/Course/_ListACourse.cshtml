@@ -4,11 +4,15 @@
     @Html.DisplayFor(modelItem => Model.CourseName)
 </div>
 <div class="col-md-3">
-    @*Html.DisplayFor(modelItem => Model. .Firstname)
-    @Html.DisplayFor(modelItem => Model.Teachers.Lastname)*@
+    @Html.Action("CourseTeacher", "Course", new { id = Model.CourseId })
 </div>
 <div class="col-md-6">
     @Html.ActionLink("Edit", "CourseEdit", "Course", new { id = Model.CourseId }) |
-    @Html.ActionLink("Course Description", "CourseDescription", "Course", new { id = Model.CourseId }) |
+    @Ajax.ActionLink("Course Details", "CourseDetails", "Course", new { id = Model.CourseId },
+    ajaxOptions :new AjaxOptions
+    {
+        UpdateTargetId="CourseIndex",
+        InsertionMode=InsertionMode.Replace
+    }) |
     @Html.ActionLink("Delete", "CourseDelete", "Course", new { id = Model.CourseId })
 </div>

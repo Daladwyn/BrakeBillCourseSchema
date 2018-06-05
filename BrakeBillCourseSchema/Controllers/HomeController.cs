@@ -66,7 +66,10 @@ namespace BrakeBillCourseSchema.Controllers
             {
                 foreach (var item in context.Assignments)
                 {
+                    if (item.IsTemplateAssignment==false)
+                    {
                     presentAssignments.Add(context.Assignments.Find(item.AssignmentId));
+                    }
                 }
             }
             return View("Assignments", presentAssignments);

@@ -14,39 +14,39 @@ namespace BrakeBillCourseSchema.Controllers
     {
         public ActionResult StudentListAssignment(int id)
         {
-            //List<Assignment> AssignmentsToShow = new List<Assignment>();
             Student studentToShow = new Student();
+            List<Assignment> studentsAssignment = new List<Assignment>();
             using (var context = new context())
             {
-                studentToShow = context.Students.Include("StudentAssignments").SingleOrDefault(s => s.StudentId == id);
-                foreach (var assignment in context.Assignments)
-                {
-                    if (assignment.StudentId == studentToShow.StudentId)
-                    {
-                        studentToShow.StudentAssignments.Add(assignment);
-                    }
-                }
-            };
+                studentToShow = context.Students.SingleOrDefault(s => s.StudentId == id);
+                //foreach (var assignment in context.Assignments)
+                //{
+                //    studentsAssignment.Add(assignment);
+                //}
+            }
+            //for (int i = studentToShow.StudentAssignments.Count(); i >=0; i--)
+            //{
+            //    studentToShow.StudentAssignments.Remove(studentsAssignment[i]); 
+
+            //}
+            //foreach (var assignment in studentsAssignment)
+            //{
+            //    if (assignment.IsTemplateAssignment == false)
+            //    {
+            //        if (assignment.StudentId == studentToShow.StudentId)
+            //        {
+            //            studentToShow.StudentAssignments.Add(assignment);
+            //        }
+            //    }
+            //}
             return PartialView("_StudentListAssignment", studentToShow);
         }
 
         public ActionResult StudentListCourses(int id)
         {
-            //List<Course> coursesToShow = new List<Course>();
             using (var context = new context())
             {
                 Student studentToShow = context.Students.Include("StudentCourses").SingleOrDefault(s => s.StudentId == id);
-                //foreach (var courseitem in context.Courses)
-                //{
-                //    foreach (var student in courseitem.CourseStudents)
-                //    {
-                //        if (student.StudentId == studentToShow.StudentId)
-                //        {
-                //            studentToShow.StudentCourses.Add(courseitem);
-                //        }
-                //    }
-                //    //coursesToShow.Add(context.Courses.Include("Students").Where(s => s.StudentId == id).ToList();
-                //}
                 return PartialView("_StudentListCourses", studentToShow);
             };
         }

@@ -1,0 +1,46 @@
+﻿@model BrakeBillCourseSchema.Models.Course
+
+<h2>Course Details</h2>
+<div id="courseTeacher">
+    
+    Teacher:@Html.Action("CourseTeacher", "Course", new { id = Model.CourseId })
+
+
+</div>
+<hr />
+<div class="table">
+    <div class="col-md-6">
+        Students:
+        @foreach (var student in Model.CourseStudents)
+        {
+            <div class="row">
+                @student.Firstname @student.Lastname
+            </div>
+        }
+        <hr />
+    </div>
+    <div class="col-md-6">
+        Assignments:
+        @foreach (var assignment in Model.CourseAssignments)
+        {
+        <div class="row">
+            <div class="col-md-2">
+                @assignment.AssignmentName
+            </div>
+            @*<div class="col-md-10">
+            @assignment.Description
+        </div>*@
+            <hr />
+        </div>
+        }
+    </div>
+</div>
+
+
+
+@Ajax.ActionLink("Back to List", "Courses", "Home", new { id = Model.CourseId },
+   ajaxOptions :new AjaxOptions
+   {
+       UpdateTargetId="CourseIndex",
+       InsertionMode=InsertionMode.Replace
+   }) |
